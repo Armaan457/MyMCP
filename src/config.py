@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     resume_drive_url: str | None = Field(default=None, alias="RESUME_DRIVE_URL")
     github_username: str = Field(default="", alias="GITHUB_USERNAME")
     github_token: str | None = Field(default=None, alias="GITHUB_TOKEN")
+    leetcode_username: str = Field(default="", alias="LEETCODE_USERNAME")
 
 @lru_cache()
 def get_settings() -> Settings:
