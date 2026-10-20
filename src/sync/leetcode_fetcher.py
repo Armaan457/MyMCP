@@ -135,8 +135,3 @@ async def sync_leetcode_data() -> dict[str, Any]:
     except Exception as e:
         return {"status": "error", "error": str(e)}
 
-
-if __name__ == "__main__":
-    import asyncio
-    res = asyncio.run(sync_leetcode_data())
-    print(res)

@@ -6,14 +6,11 @@ from src.mongo import get_async_db
 
 GITHUB_API_BASE = "https://api.github.com"
 
-async def fetch_github_profile(username: str, token: str | None = None) -> dict[str, Any]:
+async def fetch_github_profile(username: str) -> dict[str, Any]:
     headers = {
         "Accept": "application/vnd.github.v3+json",
         "User-Agent": "Portfolio-MCP/1.0"
     }
-    if token:
-        headers["Authorization"] = f"token {token}"
-        
     async with httpx.AsyncClient(headers=headers, timeout=20.0) as client:
         user_res = await client.get(f"{GITHUB_API_BASE}/users/{username}")
         if user_res.status_code == 404:
@@ -86,7 +83,7 @@ async def sync_github_data() -> dict[str, Any]:
         return {"status": "skipped", "reason": "No GITHUB_USERNAME configured"}
         
     try:
-        profile_data = await fetch_github_profile(username, settings.github_token)
+        profile_data = await fetch_github_profile(username)
         now = datetime.now(timezone.utc)
         profile_data["updated_at"] = now
         
@@ -105,8 +102,3 @@ async def sync_github_data() -> dict[str, Any]:
     except Exception as e:
         return {"status": "error", "error": str(e)}
 
-
-if __name__ == "__main__":
-    import asyncio
-    res = asyncio.run(sync_github_data())
-    print(res)
