@@ -1,4 +1,5 @@
 import argparse
+import os
 import sys
 from src.mcp_server.resources import register_resources
 from src.mcp_server.tools import register_tools
@@ -22,10 +23,24 @@ def main():
         default="stdio",
         help="Transport type (stdio or sse)"
     )
+    parser.add_argument(
+        "--host",
+        default="0.0.0.0",
+        help="Host to bind for SSE transport"
+    )
+    parser.add_argument(
+        "--port",
+        type=int,
+        default=int(os.environ.get("PORT", 7860)),
+        help="Port to bind for SSE transport"
+    )
     args = parser.parse_args()
 
     print(f"Starting Portfolio MCP Server ({args.transport})...", file=sys.stderr)
-    mcp.run(transport=args.transport)
+    if args.transport == "sse":
+        mcp.run(transport=args.transport, host=args.host, port=args.port)
+    else:
+        mcp.run(transport=args.transport)
 
 
 if __name__ == "__main__":
