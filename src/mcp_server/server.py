@@ -1,6 +1,8 @@
 import argparse
 import sys
 from src.mcp_server.resources import register_resources
+from src.mcp_server.tools import register_tools
+from src.mcp_server.prompts import register_prompts
 from mcp.server.mcpserver import MCPServer
 
 mcp = MCPServer(
@@ -9,6 +11,8 @@ mcp = MCPServer(
 )
 
 register_resources(mcp)
+register_tools(mcp)
+register_prompts(mcp)
 
 def main():
     parser = argparse.ArgumentParser(description="Run Portfolio MCP Server")

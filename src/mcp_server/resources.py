@@ -3,6 +3,7 @@ from src.config import get_settings
 from src.mongo import get_async_db
 from mcp.server.mcpserver import MCPServer
 
+
 def register_resources(mcp: MCPServer):
     @mcp.resource("portfolio://resume")
     async def get_resume_resource() -> str:
