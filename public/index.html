@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyMCP | My Interactive Developer Profile Agent</title>
+  <meta name="description" content="Model Context Protocol server connecting AI assistants to Armaan Jagirdar's verified developer credentials, codebases, and performance metrics.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            midnight: '#050711',
+            darkBlue: '#090d21',
+            surface: '#0e1430',
+            border: 'var(--accent-border)',
+            accent: {
+              primary: 'var(--accent-primary)',
+              secondary: 'var(--accent-secondary)',
+              light: 'var(--accent-light)',
+              lighter: 'var(--accent-lighter)',
+              border: 'var(--accent-border)',
+              'border-hover': 'var(--accent-border-hover)',
+              'badge-start': 'var(--accent-badge-start)',
+              'badge-end': 'var(--accent-badge-end)',
+              glow: 'var(--accent-glow)',
+              'glow-subtle': 'var(--accent-glow-subtle)',
+              ambient: 'var(--accent-ambient)',
+              'muted-bg': 'var(--accent-muted-bg)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+    @theme {
+      --color-accent-primary: var(--accent-primary);
+      --color-accent-secondary: var(--accent-secondary);
+      --color-accent-light: var(--accent-light);
+      --color-accent-lighter: var(--accent-lighter);
+      --color-accent-border: var(--accent-border);
+      --color-accent-border-hover: var(--accent-border-hover);
+      --color-accent-badge-start: var(--accent-badge-start);
+      --color-accent-badge-end: var(--accent-badge-end);
+      --color-accent-glow: var(--accent-glow);
+      --color-accent-glow-subtle: var(--accent-glow-subtle);
+      --color-accent-ambient: var(--accent-ambient);
+      --color-accent-muted-bg: var(--accent-muted-bg);
+    }
+
+    @property --accent-primary {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgb(147, 83, 211);
+    }
+
+    @property --accent-secondary {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgb(124, 77, 219);
+    }
+
+    @property --accent-light {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgb(196, 163, 235);
+    }
+
+    @property --accent-lighter {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgb(218, 196, 245);
+    }
+
+    @property --accent-border {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgba(147, 83, 211, 0.18);
+    }
+
+    @property --accent-border-hover {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgba(147, 83, 211, 0.40);
+    }
+
+    @property --accent-badge-start {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgba(147, 83, 211, 0.10);
+    }
+
+    @property --accent-badge-end {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgba(124, 77, 219, 0.10);
+    }
+
+    @property --accent-glow {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgba(147, 83, 211, 0.22);
+    }
+
+    @property --accent-glow-subtle {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgba(147, 83, 211, 0.10);
+    }
+
+    @property --accent-ambient {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgba(147, 83, 211, 0.10);
+    }
+
+    @property --accent-muted-bg {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgba(147, 83, 211, 0.05);
+    }
+
+    :root {
+      --font-family: 'Inter', sans-serif;
+      --accent-primary: rgb(147, 83, 211);
+      --accent-secondary: rgb(124, 77, 219);
+      --accent-light: rgb(196, 163, 235);
+      --accent-lighter: rgb(218, 196, 245);
+      --accent-border: rgba(147, 83, 211, 0.18);
+      --accent-border-hover: rgba(147, 83, 211, 0.40);
+      --accent-badge-start: rgba(147, 83, 211, 0.10);
+      --accent-badge-end: rgba(124, 77, 219, 0.10);
+      --accent-glow: rgba(147, 83, 211, 0.22);
+      --accent-glow-subtle: rgba(147, 83, 211, 0.10);
+      --accent-ambient: rgba(147, 83, 211, 0.10);
+      --accent-muted-bg: rgba(147, 83, 211, 0.05);
+      animation: accent-color-cycle 20s linear infinite;
+    }
+
+    @keyframes accent-color-cycle {
+      0%, 100% {
+        --accent-primary: rgb(147, 83, 211);
+        --accent-secondary: rgb(124, 77, 219);
+        --accent-light: rgb(196, 163, 235);
+        --accent-lighter: rgb(218, 196, 245);
+        --accent-border: rgba(147, 83, 211, 0.18);
+        --accent-border-hover: rgba(147, 83, 211, 0.40);
+        --accent-badge-start: rgba(147, 83, 211, 0.10);
+        --accent-badge-end: rgba(124, 77, 219, 0.10);
+        --accent-glow: rgba(147, 83, 211, 0.22);
+        --accent-glow-subtle: rgba(147, 83, 211, 0.10);
+        --accent-ambient: rgba(147, 83, 211, 0.10);
+        --accent-muted-bg: rgba(147, 83, 211, 0.05);
+      }
+      25% {
+        --accent-primary: rgb(48, 112, 214);
+        --accent-secondary: rgb(14, 142, 201);
+        --accent-light: rgb(132, 177, 235);
+        --accent-lighter: rgb(176, 204, 242);
+        --accent-border: rgba(48, 112, 214, 0.18);
+        --accent-border-hover: rgba(48, 112, 214, 0.40);
+        --accent-badge-start: rgba(48, 112, 214, 0.10);
+        --accent-badge-end: rgba(14, 142, 201, 0.10);
+        --accent-glow: rgba(48, 112, 214, 0.22);
+        --accent-glow-subtle: rgba(48, 112, 214, 0.10);
+        --accent-ambient: rgba(48, 112, 214, 0.10);
+        --accent-muted-bg: rgba(48, 112, 214, 0.05);
+      }
+      50% {
+        --accent-primary: rgb(34, 173, 155);
+        --accent-secondary: rgb(8, 148, 173);
+        --accent-light: rgb(130, 212, 196);
+        --accent-lighter: rgb(178, 228, 218);
+        --accent-border: rgba(34, 173, 155, 0.18);
+        --accent-border-hover: rgba(34, 173, 155, 0.40);
+        --accent-badge-start: rgba(34, 173, 155, 0.10);
+        --accent-badge-end: rgba(8, 148, 173, 0.10);
+        --accent-glow: rgba(34, 173, 155, 0.22);
+        --accent-glow-subtle: rgba(34, 173, 155, 0.10);
+        --accent-ambient: rgba(34, 173, 155, 0.10);
+        --accent-muted-bg: rgba(34, 173, 155, 0.05);
+      }
+      65% {
+        --accent-primary: rgb(48, 112, 214);
+        --accent-secondary: rgb(14, 142, 201);
+        --accent-light: rgb(132, 177, 235);
+        --accent-lighter: rgb(176, 204, 242);
+        --accent-border: rgba(48, 112, 214, 0.18);
+        --accent-border-hover: rgba(48, 112, 214, 0.40);
+        --accent-badge-start: rgba(48, 112, 214, 0.10);
+        --accent-badge-end: rgba(14, 142, 201, 0.10);
+        --accent-glow: rgba(48, 112, 214, 0.22);
+        --accent-glow-subtle: rgba(48, 112, 214, 0.10);
+        --accent-ambient: rgba(48, 112, 214, 0.10);
+        --accent-muted-bg: rgba(48, 112, 214, 0.05);
+      }
+      75% {
+        --accent-primary: rgb(147, 83, 211);
+        --accent-secondary: rgb(124, 77, 219);
+        --accent-light: rgb(196, 163, 235);
+        --accent-lighter: rgb(218, 196, 245);
+        --accent-border: rgba(147, 83, 211, 0.18);
+        --accent-border-hover: rgba(147, 83, 211, 0.40);
+        --accent-badge-start: rgba(147, 83, 211, 0.10);
+        --accent-badge-end: rgba(124, 77, 219, 0.10);
+        --accent-glow: rgba(147, 83, 211, 0.22);
+        --accent-glow-subtle: rgba(147, 83, 211, 0.10);
+        --accent-ambient: rgba(147, 83, 211, 0.10);
+        --accent-muted-bg: rgba(147, 83, 211, 0.05);
+      }
+      88% {
+        --accent-primary: rgb(219, 84, 107);
+        --accent-secondary: rgb(209, 88, 152);
+        --accent-light: rgb(230, 168, 178);
+        --accent-lighter: rgb(242, 202, 208);
+        --accent-border: rgba(219, 84, 107, 0.18);
+        --accent-border-hover: rgba(219, 84, 107, 0.40);
+        --accent-badge-start: rgba(219, 84, 107, 0.10);
+        --accent-badge-end: rgba(209, 88, 152, 0.10);
+        --accent-glow: rgba(219, 84, 107, 0.22);
+        --accent-glow-subtle: rgba(219, 84, 107, 0.10);
+        --accent-ambient: rgba(219, 84, 107, 0.10);
+        --accent-muted-bg: rgba(219, 84, 107, 0.05);
+      }
+    }
+
+    /* Hide scrollbars while keeping scroll functional */
+    ::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    * {
+      scrollbar-width: none;
+    }
+
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Custom link styling */
+    a {
+      transition: all 0.3s ease;
+    }
+
+    /* Section animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .animate-fadeInUp {
+      animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .animate-slideInRight {
+      animation: slideInRight 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Enhanced button styles */
+    button {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    /* Text selection styling */
+    ::selection {
+      background: var(--accent-border-hover, rgba(147, 83, 211, 0.35));
+      color: #ffffff;
+    }
+
+    /* Improved focus states for accessibility */
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--accent-primary, #9353d3);
+      outline-offset: 2px;
+    }
+
+    /* Smooth transitions across elements */
+    * {
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter;
+      transition-duration: 220ms;
+      transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Prevent transition on initial page load */
+    .no-transition {
+      transition: none !important;
+    }
+
+    @keyframes cd-spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .cd-spinning {
+      animation: cd-spin 3.5s linear infinite;
+    }
+
+    .cd-paused {
+      animation: cd-spin 3.5s linear infinite;
+      animation-play-state: paused;
+    }
+
+    body {
+      font-family: var(--font-family, 'Inter', sans-serif);
+      background-color: #050711;
+      color: #f8fafc;
+      background-image: 
+        radial-gradient(circle at 18% 10%, var(--accent-ambient) 0%, transparent 45%),
+        radial-gradient(circle at 82% 28%, var(--accent-glow-subtle) 0%, transparent 40%),
+        radial-gradient(circle at 18% 60%, var(--accent-ambient) 0%, transparent 45%),
+        radial-gradient(circle at 82% 88%, var(--accent-glow-subtle) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    .spectral-border {
+      position: relative;
+    }
+
+    .spectral-border::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 50%, var(--accent-light) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    .spectral-glow {
+      box-shadow: 0 0 35px -12px var(--accent-glow);
+    }
+  </style>
+</head>
+<body class="min-h-screen font-sans antialiased text-[16px] leading-relaxed">
+
+  <!-- Subdued Dynamic Color Cycle Accent Line -->
+  <div class="h-[2px] w-full opacity-80 transition-colors" style="background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-light));"></div>
+
+  <!-- Main Navigation Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-midnight/85 border-b" style="border-color: var(--accent-border);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-18 flex items-center justify-between gap-4">
+      <nav class="flex items-center gap-5 sm:gap-8 text-xs sm:text-sm text-slate-300 font-medium overflow-x-auto whitespace-nowrap py-1">
+        <a href="#overview" class="hover:text-white transition">Overview</a>
+        <a href="#capabilities" class="hover:text-white transition">Capabilities</a>
+        <a href="#clients" class="hover:text-white transition">Client Setup</a>
+        <a href="#scenarios" class="hover:text-white transition">Prompts</a>
+      </nav>
+
+      <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+        <a href="https://armaanjagirdar.me" target="_blank" rel="noopener noreferrer" 
+           class="px-3.5 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-slate-200 hover:text-white rounded-lg bg-surface hover:bg-surface/80 border transition flex items-center gap-1.5"
+           style="border-color: var(--accent-border);">
+          <span>armaanjagirdar.me</span>
+          <svg class="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero / Overview Section -->
+    <section id="overview" class="max-w-6xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14 pb-12 sm:pb-16 text-center animate-fadeInUp">
+
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-5 leading-[1.15] max-w-4xl mx-auto">
+        Transform my developer profile into an interactive AI agent.
+        </span>
+      </h1>
+
+      <p class="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed font-normal">
+        Skip static resumes and outdated PDFs. Connect ChatGPT, Claude, or Cursor directly to real-time ground truth covering my verified projects, internships, codebases, and algorithmic problem-solving telemetry.
+      </p>
+
+      <!-- Endpoint Box -->
+      <div class="max-w-3xl mx-auto bg-darkBlue/90 rounded-2xl p-5 sm:p-7 spectral-border spectral-glow mb-10 sm:mb-12 text-left">
+        <div class="flex items-center justify-between text-xs sm:text-sm font-mono mb-3 px-1">
+          <span class="font-semibold flex items-center gap-2" style="color: var(--accent-light);">
+            <svg class="w-4 h-4" style="color: var(--accent-primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            REMOTE SSE SERVER ENDPOINT
+          </span>
+          <span class="font-medium flex items-center gap-1.5 text-xs text-emerald-400">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"></span>
+            Online and Ready
+          </span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div class="flex-grow bg-midnight border rounded-xl px-4 py-3.5 font-mono text-sm sm:text-base select-all overflow-x-auto whitespace-nowrap" style="border-color: var(--accent-border); color: var(--accent-light);">
+            https://mcp.armaanjagirdar.me/sse
+          </div>
+          <button id="copyBtn" onclick="copyEndpoint()" 
+                  class="px-6 py-3.5 rounded-xl text-white font-semibold text-sm sm:text-base transition flex items-center justify-center gap-2 active:scale-95 shrink-0 hover:opacity-95"
+                  style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); box-shadow: 0 4px 14px var(--accent-glow-subtle);">
+            <svg id="copyIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+            <span id="copyText">Copy Endpoint</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Client Session Dossier Example -->
+      <div class="max-w-4xl mx-auto bg-darkBlue/70 border rounded-2xl overflow-hidden shadow-2xl text-left" style="border-color: var(--accent-border);">
+        <div class="bg-midnight/90 px-4 sm:px-6 py-3.5 border-b flex items-center justify-between text-xs sm:text-sm font-mono text-slate-400" style="border-color: var(--accent-border);">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+            <span class="ml-2 text-slate-200 font-sans font-medium">AI Client Session &bull; evaluate_job_fit</span>
+          </div>
+          <span class="font-semibold" style="color: var(--accent-light);">tool_call: confirmed</span>
+        </div>
+        <div class="p-5 sm:p-7 font-mono text-sm sm:text-base space-y-4">
+          <div class="text-slate-300">
+            <span class="font-semibold" style="color: var(--accent-primary);">User:</span> &ldquo;Evaluate Armaan's fit for an Applied AI role focusing on distributed systems and agentic pipelines.&rdquo;
+          </div>
+          <div class="bg-midnight/80 rounded-xl p-4 sm:p-5 border text-slate-300 space-y-2.5" style="border-color: var(--accent-border);">
+            <div class="font-bold flex items-center gap-2 text-sm sm:text-base" style="color: var(--accent-light);">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              MyMCP Candidate Dossier Output:
+            </div>
+            <p class="leading-relaxed text-slate-200">
+              <strong class="font-semibold" style="color: var(--accent-light);">Role Fit Score: 94%</strong> &bull; Strong alignment across distributed systems and agent orchestration.
+            </p>
+            <ul class="list-disc list-inside space-y-1.5 text-slate-300 pl-1 text-xs sm:text-sm leading-relaxed">
+              <li><strong class="text-blue-300">Distributed Architecture:</strong> Designed BloomMesh, a Dynamo-style distributed Bloom filter cluster featuring consistent hashing and quorum replication.</li>
+              <li><strong class="text-purple-300">Production AI Agents:</strong> Built GraphRAG intelligence retrieval at DRDO and multi-agent computer vision systems using CrewAI at Forage AI.</li>
+              <li><strong class="text-emerald-300">DSA Telemetry:</strong> 300+ LeetCode problems solved with top percentiles in Graphs and Dynamic Programming.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Four Pillars Section -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-14 border-t" style="border-color: var(--accent-border);">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="bg-darkBlue/50 border border-purple-900/30 hover:border-purple-500/50 rounded-2xl p-6 sm:p-7 transition duration-300 group hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/10">
+          <div class="w-11 h-11 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-4 font-bold text-sm">
+            01
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-purple-300 transition">Career Ground Truth</h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Eliminates hallucinations with direct semantic queries into indexed career history and past technical roles.
+          </p>
+        </div>
+
+        <div class="bg-darkBlue/50 border border-blue-900/30 hover:border-blue-500/50 rounded-2xl p-6 sm:p-7 transition duration-300 group hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10">
+          <div class="w-11 h-11 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-4 font-bold text-sm">
+            02
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-blue-300 transition">Codebase Telemetry</h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Inspect real system design decisions, repository stars, commit cadence, and architectural documentation.
+          </p>
+        </div>
+
+        <div class="bg-darkBlue/50 border border-teal-900/30 hover:border-teal-500/50 rounded-2xl p-6 sm:p-7 transition duration-300 group hover:-translate-y-1 hover:shadow-lg hover:shadow-teal-500/10">
+          <div class="w-11 h-11 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400 mb-4 font-bold text-sm">
+            03
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-teal-300 transition">Algorithmic Readiness</h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Live computer science verification with real contest rating rankings and deep category difficulty distributions.
+          </p>
+        </div>
+
+        <div class="bg-darkBlue/50 border border-rose-900/30 hover:border-rose-500/50 rounded-2xl p-6 sm:p-7 transition duration-300 group hover:-translate-y-1 hover:shadow-lg hover:shadow-rose-500/10">
+          <div class="w-11 h-11 rounded-xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400 mb-4 font-bold text-sm">
+            04
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-rose-300 transition">Automated Fit Scoring</h3>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            Paste any job description to generate evidence dossiers with concrete proof points from code commits.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capabilities & Schema Section -->
+    <section id="capabilities" class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-16 border-t" style="border-color: var(--accent-border);">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider mb-2.5" style="color: var(--accent-primary);">Capabilities & Schema</h2>
+        <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Four Harmonious Tools for AI Evaluation</p>
+        <p class="text-slate-300 text-base max-w-xl mx-auto mt-2.5">
+          Every tool is strictly typed, structured, and registered under the official Model Context Protocol specifications.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-darkBlue/60 border border-purple-900/40 hover:border-purple-500/50 rounded-2xl p-7 sm:p-8 transition duration-300 group hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/10">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs sm:text-sm font-bold px-3 py-1 rounded-lg bg-purple-500/10 text-purple-300 border border-purple-500/30">
+              tool: search_experience
+            </span>
+            <span class="text-xs sm:text-sm font-mono text-purple-400/80">Purple &bull; Career Index</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-white mb-2.5 group-hover:text-purple-200 transition">Resume & Professional History</h3>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-5">
+            Queries parsed resume data from Google Drive. Deep searches across work as an AI Researcher at DRDO (cyber threat intelligence and knowledge graphs), SDE work at Forage AI, and academic coursework at Thapar Institute.
+          </p>
+          <div class="bg-midnight/90 rounded-xl p-4 border border-border/70 font-mono text-xs sm:text-sm text-slate-300 space-y-1.5">
+            <div class="text-slate-400 font-semibold">Parameters:</div>
+            <div><span class="text-purple-400">query:</span> <span class="text-slate-200">string (e.g. &ldquo;GraphRAG&rdquo;, &ldquo;Agent architectures&rdquo;, &ldquo;Distributed systems&rdquo;)</span></div>
+            <div><span class="text-purple-400">category:</span> <span class="text-slate-200">&ldquo;all&rdquo; | &ldquo;experience&rdquo; | &ldquo;education&rdquo; | &ldquo;projects&rdquo;</span></div>
+          </div>
+        </div>
+
+        <div class="bg-darkBlue/60 border border-blue-900/40 hover:border-blue-500/50 rounded-2xl p-7 sm:p-8 transition duration-300 group hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs sm:text-sm font-bold px-3 py-1 rounded-lg bg-blue-500/10 text-blue-300 border border-blue-500/30">
+              tool: get_project_deep_dive
+            </span>
+            <span class="text-xs sm:text-sm font-mono text-blue-400/80">Blue &bull; Codebase Cache</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-white mb-2.5 group-hover:text-blue-200 transition">Codebase & Architecture Inspection</h3>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-5">
+            Fetches comprehensive metadata for featured projects including BloomMesh, AgriVerse, StockPulse, and NeuroCred. Returns stars, primary languages, commit indicators, and cached README technical outlines.
+          </p>
+          <div class="bg-midnight/90 rounded-xl p-4 border border-border/70 font-mono text-xs sm:text-sm text-slate-300 space-y-1.5">
+            <div class="text-slate-400 font-semibold">Parameters:</div>
+            <div><span class="text-blue-400">repo_name:</span> <span class="text-slate-200">string (e.g. &ldquo;BloomMesh&rdquo;, &ldquo;StockPulse&rdquo;, &ldquo;AgriVerse&rdquo;, &ldquo;MyMCP&rdquo;)</span></div>
+          </div>
+        </div>
+
+        <div class="bg-darkBlue/60 border border-teal-900/40 hover:border-teal-500/50 rounded-2xl p-7 sm:p-8 transition duration-300 group hover:-translate-y-1 hover:shadow-lg hover:shadow-teal-500/10">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs sm:text-sm font-bold px-3 py-1 rounded-lg bg-teal-500/10 text-teal-300 border border-teal-500/30">
+              tool: get_dsa_proficiency
+            </span>
+            <span class="text-xs sm:text-sm font-mono text-teal-400/80">Teal &bull; LeetCode Telemetry</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-white mb-2.5 group-hover:text-teal-200 transition">Algorithmic Problem-Solving Metrics</h3>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-5">
+            Pulls live computer science fundamentals data directly from LeetCode. Inspects solved problem distribution (Easy, Medium, Hard), contest rating scores, global ranking percentiles, and category mastery.
+          </p>
+          <div class="bg-midnight/90 rounded-xl p-4 border border-border/70 font-mono text-xs sm:text-sm text-slate-300 space-y-1.5">
+            <div class="text-slate-400 font-semibold">Parameters:</div>
+            <div><span class="text-teal-400">topic:</span> <span class="text-slate-200">optional string (e.g. &ldquo;Dynamic Programming&rdquo;, &ldquo;Trees&rdquo;, &ldquo;Graphs&rdquo;)</span></div>
+          </div>
+        </div>
+
+        <div class="bg-darkBlue/60 border border-rose-900/40 hover:border-rose-500/50 rounded-2xl p-7 sm:p-8 transition duration-300 group hover:-translate-y-1 hover:shadow-lg hover:shadow-rose-500/10">
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-mono text-xs sm:text-sm font-bold px-3 py-1 rounded-lg bg-rose-500/10 text-rose-300 border border-rose-500/30">
+              tool: evaluate_job_fit
+            </span>
+            <span class="text-xs sm:text-sm font-mono text-rose-400/80">Rose &bull; Fit Evaluation</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-white mb-2.5 group-hover:text-rose-200 transition">Role-Fit Dossier & Gap Analysis</h3>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-5">
+            Aggregates all credentials against an arbitrary job description. Automatically calculates compatibility percentages, lists specific technical proof points, and highlights growth areas for interview prep.
+          </p>
+          <div class="bg-midnight/90 rounded-xl p-4 border border-border/70 font-mono text-xs sm:text-sm text-slate-300 space-y-1.5">
+            <div class="text-slate-400 font-semibold">Parameters:</div>
+            <div><span class="text-rose-400">job_description:</span> <span class="text-slate-200">string (Full text of requirements and role responsibilities)</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Client Integration Section (Featuring Official Logos) -->
+    <section id="clients" class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-16 border-t" style="border-color: var(--accent-border);">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider mb-2.5" style="color: var(--accent-secondary);">Client Integration</h2>
+        <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Connect Your Favorite AI Assistant</p>
+        <p class="text-slate-300 text-base max-w-xl mx-auto mt-2.5">
+          Step-by-step setup instructions for ChatGPT, Claude Desktop, and Cursor IDE.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- ChatGPT Card -->
+        <div class="bg-darkBlue/70 border hover:border-emerald-500/40 rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/10" style="border-color: var(--accent-border);">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center shrink-0 shadow-sm shadow-emerald-500/10">
+                <svg class="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1683a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4947zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1683a.0757.0757 0 0 1-.071 0l-4.8303-2.7866A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.6668zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1635a.0804.0804 0 0 1-.038-.0567V6.0748a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.4598a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.6069 1.4998-2.602-1.4998z"/>
+                </svg>
+              </div>
+              <h3 class="font-bold text-white text-lg sm:text-xl">ChatGPT</h3>
+            </div>
+            <p class="text-slate-300 text-sm sm:text-base mb-4 leading-relaxed">
+              Connect via ChatGPT developer MCP connector:
+            </p>
+            <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed">
+              <li>Open ChatGPT Settings &rarr; Custom MCP Servers.</li>
+              <li>Click <strong class="text-white">Add Custom Server</strong>.</li>
+              <li>Paste URL: <code class="font-mono select-all text-xs" style="color: var(--accent-light);">https://mcp.armaanjagirdar.me/sse</code></li>
+              <li>Leave authentication as <strong class="text-white">OAuth or no auth</strong>.</li>
+              <li>Confirm and save. All 4 tools register automatically.</li>
+            </ol>
+          </div>
+          <button onclick="copyEndpoint()" class="w-full py-3 rounded-xl bg-surface hover:bg-emerald-950/40 border border-emerald-500/25 text-xs sm:text-sm font-mono text-emerald-300 transition font-medium">
+            Copy Server URL
+          </button>
+        </div>
+
+        <!-- Claude Desktop Card -->
+        <div class="bg-darkBlue/70 border hover:border-[#d97757]/40 rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition hover:-translate-y-1 hover:shadow-lg hover:shadow-[#d97757]/10" style="border-color: var(--accent-border);">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-[#d97757]/10 border border-[#d97757]/25 flex items-center justify-center shrink-0 shadow-sm shadow-[#d97757]/10">
+                <svg class="w-5 h-5 text-[#d97757]" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/>
+                </svg>
+              </div>
+              <h3 class="font-bold text-white text-lg sm:text-xl">Claude Desktop</h3>
+            </div>
+            <p class="text-slate-300 text-sm sm:text-base mb-3 leading-relaxed">
+              Add to your local configuration file:
+            </p>
+            <div class="relative mb-3">
+              <pre class="bg-midnight border rounded-xl p-4 font-mono text-xs overflow-x-auto leading-relaxed" style="border-color: var(--accent-border); color: var(--accent-lighter);">{
+  "mcpServers": {
+    "armaan-profile": {
+      "url": "https://mcp.armaanjagirdar.me/sse"
+    }
+  }
+}</pre>
+            </div>
+            <p class="text-xs font-mono text-slate-400 mb-5">
+              Location: ~/Library/Application Support/Claude/claude_desktop_config.json
+            </p>
+          </div>
+          <button onclick="copyClaudeJSON()" class="w-full py-3 rounded-xl bg-surface hover:bg-[#d97757]/15 border text-xs sm:text-sm font-mono transition font-medium" style="border-color: var(--accent-border); color: var(--accent-light);">
+            Copy Configuration JSON
+          </button>
+        </div>
+
+        <!-- Cursor IDE Card -->
+        <div class="bg-darkBlue/70 border hover:border-blue-500/40 rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10" style="border-color: var(--accent-border);">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/25 flex items-center justify-center shrink-0 shadow-sm shadow-blue-500/10">
+                <svg class="w-5 h-5 text-blue-400" viewBox="0 0 467 532" fill="currentColor">
+                  <path d="M457.43 125.94 244.42 2.96a22.13 22.13 0 0 0-22.12 0L9.3 125.94C3.55 129.26 0 135.4 0 142.05v247.99c0 6.65 3.55 12.79 9.3 16.11l213.01 122.98a22.13 22.13 0 0 0 22.12 0l213.01-122.98c5.75-3.32 9.3-9.46 9.3-16.11V142.05c0-6.65-3.55-12.79-9.3-16.11zm-13.38 26.05L238.42 508.15c-1.39 2.4-5.06 1.42-5.06-1.36V273.58c0-4.66-2.49-8.97-6.53-11.31L24.87 145.67c-2.4-1.39-1.42-5.06 1.36-5.06h411.26c5.84 0 9.49 6.33 6.57 11.39h-.01Z"/>
+                </svg>
+              </div>
+              <h3 class="font-bold text-white text-lg sm:text-xl">Cursor IDE</h3>
+            </div>
+            <p class="text-slate-300 text-sm sm:text-base mb-4 leading-relaxed">
+              Add directly in Cursor settings:
+            </p>
+            <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed">
+              <li>Open Cursor Settings &rarr; Features &rarr; MCP Servers.</li>
+              <li>Click <strong class="text-white">Add New MCP Server</strong>.</li>
+              <li>Set Type: <span class="font-mono text-blue-300">sse</span></li>
+              <li>Set URL: <span class="font-mono text-xs" style="color: var(--accent-light);">https://mcp.armaanjagirdar.me/sse</span></li>
+              <li>Invoke via Cursor Chat or Composer with natural language.</li>
+            </ol>
+          </div>
+          <button onclick="copyEndpoint()" class="w-full py-3 rounded-xl bg-surface hover:bg-blue-950/40 border border-blue-500/25 text-xs sm:text-sm font-mono text-blue-300 transition font-medium">
+            Copy Server URL
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scenarios / Prompts Section -->
+    <section id="scenarios" class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-16 border-t" style="border-color: var(--accent-border);">
+      <div class="text-center mb-10 sm:mb-12">
+        <h2 class="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider mb-2.5" style="color: var(--accent-primary);">Evaluation Prompts</h2>
+        <p class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Try These Prompts Once Connected</p>
+        <p class="text-slate-300 text-base max-w-xl mx-auto mt-2.5">
+          Copy and paste these queries directly into your AI chat window to see the server in action.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+        <div class="bg-darkBlue/50 border border-purple-900/30 hover:border-purple-500/50 rounded-xl p-5 sm:p-6 transition hover:shadow-lg hover:shadow-purple-500/5 hover:-translate-y-0.5">
+          <div class="text-xs sm:text-sm font-mono text-purple-400 font-semibold mb-2 uppercase">Role Compatibility</div>
+          <p class="text-sm sm:text-base text-slate-200 font-medium leading-relaxed">
+            &ldquo;Evaluate Armaan's fit for an Applied AI Engineer role building agentic workflows and retrieval systems at our company.&rdquo;
+          </p>
+        </div>
+
+        <div class="bg-darkBlue/50 border border-blue-900/30 hover:border-blue-500/50 rounded-xl p-5 sm:p-6 transition hover:shadow-lg hover:shadow-blue-500/5 hover:-translate-y-0.5">
+          <div class="text-xs sm:text-sm font-mono text-blue-400 font-semibold mb-2 uppercase">Distributed Systems Deep Dive</div>
+          <p class="text-sm sm:text-base text-slate-200 font-medium leading-relaxed">
+            &ldquo;Explain the architecture of BloomMesh from Armaan's GitHub, focusing on consistent hashing and quorum replication.&rdquo;
+          </p>
+        </div>
+
+        <div class="bg-darkBlue/50 border border-teal-900/30 hover:border-teal-500/50 rounded-xl p-5 sm:p-6 transition hover:shadow-lg hover:shadow-teal-500/5 hover:-translate-y-0.5">
+          <div class="text-xs sm:text-sm font-mono text-teal-400 font-semibold mb-2 uppercase">Computer Science Fundamentals</div>
+          <p class="text-sm sm:text-base text-slate-200 font-medium leading-relaxed">
+            &ldquo;What are Armaan's strongest algorithmic topics on LeetCode and what is his contest rating?&rdquo;
+          </p>
+        </div>
+
+        <div class="bg-darkBlue/50 border border-rose-900/30 hover:border-rose-500/50 rounded-xl p-5 sm:p-6 transition hover:shadow-lg hover:shadow-rose-500/5 hover:-translate-y-0.5">
+          <div class="text-xs sm:text-sm font-mono text-rose-400 font-semibold mb-2 uppercase">Witty Profile Critique</div>
+          <p class="text-sm sm:text-base text-slate-200 font-medium leading-relaxed">
+            &ldquo;Give me a witty, humorous critique of Armaan's developer profile based on his GitHub commits and problem-solving ratios.&rdquo;
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t py-10 bg-midnight/90" style="border-color: var(--accent-border);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-5 text-xs sm:text-sm text-slate-400 font-mono">
+      <div class="flex items-center gap-3">
+        <a href="https://armaanjagirdar.me" target="_blank" rel="noopener noreferrer" class="hover:text-white transition" style="color: var(--accent-light);">armaanjagirdar.me</a>
+        <span>&bull;</span>
+        <a href="https://github.com/Armaan457/MyMCP" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">GitHub</a>
+        <span>&bull;</span>
+        <a href="https://linkedin.com/in/armaan-jagirdar-183b47285" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">LinkedIn</a>
+      </div>
+      <div>
+        <span>Developed with ❤️ by Armaan Jagirdar</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Copy endpoint function with visual feedback
+    function copyEndpoint() {
+      const url = "https://mcp.armaanjagirdar.me/sse";
+      navigator.clipboard.writeText(url).then(() => {
+        const text = document.getElementById("copyText");
+        const orig = text.innerText;
+        text.innerText = "Copied!";
+        setTimeout(() => {
+          text.innerText = orig;
+        }, 1800);
+      });
+    }
+
+    // Copy Claude configuration JSON
+    function copyClaudeJSON() {
+      const json = JSON.stringify({
+        "mcpServers": {
+          "armaan-profile": {
+            "url": "https://mcp.armaanjagirdar.me/sse"
+          }
+        }
+      }, null, 2);
+      navigator.clipboard.writeText(json).then(() => {
+        alert("Copied Claude Desktop configuration JSON to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>

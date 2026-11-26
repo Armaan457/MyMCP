@@ -29,3 +29,5 @@ flowchart LR
 - **Framework**: FastMCP
 - **Database**: MongoDB
 - **Ingestion**: Async REST & GraphQL APIs and PyPDF parsing
+- **Deployment**: AWS EC2, Elastic IP, Docker and Caddy
+- **CI/CD**: GitHub Actions
