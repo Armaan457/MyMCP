@@ -1,0 +1,31 @@
+services:
+  mcp-server:
+    build: .
+    container_name: my-mcp-server
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - PORT=7860
+    expose:
+      - "7860"
+
+  caddy:
+    image: caddy:alpine
+    container_name: caddy-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file:
+      - .env
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - mcp-server
+
+volumes:
+  caddy_data:
+  caddy_config:
