@@ -4,16 +4,14 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy to EC2 via SSH
+      - name: Deploy and Bootstrap EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -21,8 +19,54 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             set -e
-            cd /home/${{ secrets.EC2_USER }}/MyMCP
-            git pull origin main
-            docker compose down --remove-orphans
-            docker compose up -d --build
-            docker image prune -f
+
+            # 1. Ensure Docker, Docker Compose, and Git are installed on EC2
+            if ! command -v docker &> /dev/null; then
+              echo "Installing Docker..."
+              sudo apt-get update
+              sudo apt-get install -y docker.io docker-compose-v2 git
+              sudo usermod -aG docker ${{ secrets.EC2_USER }}
+            fi
+
+            # 2. Ensure 2GB Swapfile exists (prevents OOM crashes during build)
+            if [ ! -f /swapfile ]; then
+              echo "Configuring 2GB swapfile..."
+              sudo fallocate -l 2G /swapfile
+              sudo chmod 600 /swapfile
+              sudo mkswap /swapfile
+              sudo swapon /swapfile
+              echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+            fi
+
+            # 3. Clone or pull repository
+            REPO_DIR="/home/${{ secrets.EC2_USER }}/MyMCP"
+            if [ ! -d "$REPO_DIR" ]; then
+              echo "Cloning repository for the first time..."
+              git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git "$REPO_DIR"
+              cd "$REPO_DIR"
+            else
+              echo "Pulling latest code..."
+              cd "$REPO_DIR"
+              git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+              git fetch origin main
+              git reset --hard origin/main
+            fi
+
+            # 4. Generate .env file dynamically from GitHub Secrets
+            echo "Injecting secrets into .env..."
+            {
+              echo "MONGODB_URI=${{ secrets.MONGODB_URI }}"
+              echo "MONGODB_DB_NAME=${{ secrets.MONGODB_DB_NAME }}"
+              echo "RESUME_DRIVE_URL=${{ secrets.RESUME_DRIVE_URL }}"
+              echo "GITHUB_USERNAME=${{ secrets.GH_USERNAME }}"
+              echo "LEETCODE_USERNAME=${{ secrets.LEETCODE_USERNAME }}"
+              echo "DOMAIN_NAME=${{ secrets.DOMAIN_NAME }}"
+              echo "PORT=7860"
+            } > .env
+
+            # 5. Build and launch containers via Docker Compose
+            echo "Starting containers..."
+            sudo docker compose down --remove-orphans || true
+            sudo docker compose up -d --build
+            sudo docker image prune -f
+            echo "MCP Server is up and live!"
