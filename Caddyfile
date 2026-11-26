@@ -1,6 +1,19 @@
 {$DOMAIN_NAME} {
+    # CORS headers for web-based clients (ChatGPT, Claude web, MCP Inspector)
+    @options method OPTIONS
+    handle @options {
+        header Access-Control-Allow-Origin "*"
+        header Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        header Access-Control-Allow-Headers "*"
+        respond 204
+    }
+
+    header Access-Control-Allow-Origin "*"
+    header Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    header Access-Control-Allow-Headers "*"
+
+    # Reverse proxy to MCP server container with unbuffered SSE streaming
     reverse_proxy mcp-server:7860 {
-        # Ensure smooth SSE streaming without response buffering
         flush_interval -1
     }
 }

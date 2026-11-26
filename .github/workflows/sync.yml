@@ -1,0 +1,22 @@
+name: Daily Profile Sync
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Daily Sync on EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -e
+            echo "Starting daily profile sync inside container..."
+            sudo docker exec my-mcp-server python -m src.sync.runner
+            echo "Daily sync completed successfully!"
