@@ -1,4 +1,17 @@
+{
+    order rate_limit before basicauth
+}
+
 {$DOMAIN_NAME} {
+    # Rate limit: 100 requests per minute per IP to protect the MCP server
+    rate_limit {
+        zone mcp_limit {
+            key {remote_host}
+            events 25
+            window 1m
+        }
+    }
+
     # CORS headers for web-based clients (ChatGPT, Claude web, MCP Inspector)
     @options method OPTIONS
     handle @options {

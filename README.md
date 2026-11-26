@@ -1,6 +1,6 @@
 # MyMCP
 
-A Model Context Protocol (MCP) server that connects AI assistants (Claude, Cursor) directly to my live developer profile.
+A Model Context Protocol (MCP) server that connects AI assistants (ChatGPT, Claude, Cursor) directly to my live developer profile.
 
 Ingests and indexes credentials from my Resume, GitHub and LeetCode for search, automated job fit evaluation, and tailored interview prep.
 
@@ -11,7 +11,7 @@ flowchart LR
     Drive["Google Drive"] --> Sync["Async Ingestion"]
     GitHub["GitHub API"] --> Sync
     LeetCode["LeetCode API"] --> Sync
-    Sync --> DB[("MongoDB")] --> Server["MCP Server"] --> AI["Claude / Cursor"]
+    Sync --> DB[("MongoDB")] --> Server["FastMCP Server"] --> Caddy --> AI["AI Clients (ChatGPT / Claude / Cursor)"]
 ```
 
 ## Features

@@ -11,7 +11,9 @@ services:
       - "7860"
 
   caddy:
-    image: caddy:alpine
+    build:
+      context: .
+      dockerfile: Dockerfile.caddy
     container_name: caddy-proxy
     restart: unless-stopped
     ports:
