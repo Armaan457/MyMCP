@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@theme {
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-light: var(--accent-light);
+  --color-accent-lighter: var(--accent-lighter);
+  --color-accent-border: var(--accent-border);
+  --color-accent-border-hover: var(--accent-border-hover);
+  --color-accent-badge-start: var(--accent-badge-start);
+  --color-accent-badge-end: var(--accent-badge-end);
+  --color-accent-glow: var(--accent-glow);
+  --color-accent-glow-subtle: var(--accent-glow-subtle);
+  --color-accent-ambient: var(--accent-ambient);
+  --color-accent-muted-bg: var(--accent-muted-bg);
+}
+
+@property --accent-primary {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgb(147, 83, 211);
+}
+
+@property --accent-secondary {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgb(124, 77, 219);
+}
+
+@property --accent-light {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgb(196, 163, 235);
+}
+
+@property --accent-lighter {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgb(218, 196, 245);
+}
+
+@property --accent-border {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(147, 83, 211, 0.18);
+}
+
+@property --accent-border-hover {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(147, 83, 211, 0.40);
+}
+
+@property --accent-badge-start {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(147, 83, 211, 0.10);
+}
+
+@property --accent-badge-end {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(124, 77, 219, 0.10);
+}
+
+@property --accent-glow {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(147, 83, 211, 0.22);
+}
+
+@property --accent-glow-subtle {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(147, 83, 211, 0.10);
+}
+
+@property --accent-ambient {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(147, 83, 211, 0.10);
+}
+
+@property --accent-muted-bg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(147, 83, 211, 0.05);
+}
+
+:root {
+  --font-family: 'Inter', sans-serif;
+  --accent-primary: rgb(147, 83, 211);
+  --accent-secondary: rgb(124, 77, 219);
+  --accent-light: rgb(196, 163, 235);
+  --accent-lighter: rgb(218, 196, 245);
+  --accent-border: rgba(147, 83, 211, 0.18);
+  --accent-border-hover: rgba(147, 83, 211, 0.40);
+  --accent-badge-start: rgba(147, 83, 211, 0.10);
+  --accent-badge-end: rgba(124, 77, 219, 0.10);
+  --accent-glow: rgba(147, 83, 211, 0.22);
+  --accent-glow-subtle: rgba(147, 83, 211, 0.10);
+  --accent-ambient: rgba(147, 83, 211, 0.10);
+  --accent-muted-bg: rgba(147, 83, 211, 0.05);
+  animation: accent-color-cycle 20s linear infinite;
+}
+
+@keyframes accent-color-cycle {
+  0%, 100% {
+    --accent-primary: rgb(147, 83, 211);
+    --accent-secondary: rgb(124, 77, 219);
+    --accent-light: rgb(196, 163, 235);
+    --accent-lighter: rgb(218, 196, 245);
+    --accent-border: rgba(147, 83, 211, 0.18);
+    --accent-border-hover: rgba(147, 83, 211, 0.40);
+    --accent-badge-start: rgba(147, 83, 211, 0.10);
+    --accent-badge-end: rgba(124, 77, 219, 0.10);
+    --accent-glow: rgba(147, 83, 211, 0.22);
+    --accent-glow-subtle: rgba(147, 83, 211, 0.10);
+    --accent-ambient: rgba(147, 83, 211, 0.10);
+    --accent-muted-bg: rgba(147, 83, 211, 0.05);
+  }
+  25% {
+    --accent-primary: rgb(48, 112, 214);
+    --accent-secondary: rgb(14, 142, 201);
+    --accent-light: rgb(132, 177, 235);
+    --accent-lighter: rgb(176, 204, 242);
+    --accent-border: rgba(48, 112, 214, 0.18);
+    --accent-border-hover: rgba(48, 112, 214, 0.40);
+    --accent-badge-start: rgba(48, 112, 214, 0.10);
+    --accent-badge-end: rgba(14, 142, 201, 0.10);
+    --accent-glow: rgba(48, 112, 214, 0.22);
+    --accent-glow-subtle: rgba(48, 112, 214, 0.10);
+    --accent-ambient: rgba(48, 112, 214, 0.10);
+    --accent-muted-bg: rgba(48, 112, 214, 0.05);
+  }
+  50% {
+    --accent-primary: rgb(34, 173, 155);
+    --accent-secondary: rgb(8, 148, 173);
+    --accent-light: rgb(130, 212, 196);
+    --accent-lighter: rgb(178, 228, 218);
+    --accent-border: rgba(34, 173, 155, 0.18);
+    --accent-border-hover: rgba(34, 173, 155, 0.40);
+    --accent-badge-start: rgba(34, 173, 155, 0.10);
+    --accent-badge-end: rgba(8, 148, 173, 0.10);
+    --accent-glow: rgba(34, 173, 155, 0.22);
+    --accent-glow-subtle: rgba(34, 173, 155, 0.10);
+    --accent-ambient: rgba(34, 173, 155, 0.10);
+    --accent-muted-bg: rgba(34, 173, 155, 0.05);
+  }
+  65% {
+    --accent-primary: rgb(48, 112, 214);
+    --accent-secondary: rgb(14, 142, 201);
+    --accent-light: rgb(132, 177, 235);
+    --accent-lighter: rgb(176, 204, 242);
+    --accent-border: rgba(48, 112, 214, 0.18);
+    --accent-border-hover: rgba(48, 112, 214, 0.40);
+    --accent-badge-start: rgba(48, 112, 214, 0.10);
+    --accent-badge-end: rgba(14, 142, 201, 0.10);
+    --accent-glow: rgba(48, 112, 214, 0.22);
+    --accent-glow-subtle: rgba(48, 112, 214, 0.10);
+    --accent-ambient: rgba(48, 112, 214, 0.10);
+    --accent-muted-bg: rgba(48, 112, 214, 0.05);
+  }
+  75% {
+    --accent-primary: rgb(147, 83, 211);
+    --accent-secondary: rgb(124, 77, 219);
+    --accent-light: rgb(196, 163, 235);
+    --accent-lighter: rgb(218, 196, 245);
+    --accent-border: rgba(147, 83, 211, 0.18);
+    --accent-border-hover: rgba(147, 83, 211, 0.40);
+    --accent-badge-start: rgba(147, 83, 211, 0.10);
+    --accent-badge-end: rgba(124, 77, 219, 0.10);
+    --accent-glow: rgba(147, 83, 211, 0.22);
+    --accent-glow-subtle: rgba(147, 83, 211, 0.10);
+    --accent-ambient: rgba(147, 83, 211, 0.10);
+    --accent-muted-bg: rgba(147, 83, 211, 0.05);
+  }
+  88% {
+    --accent-primary: rgb(219, 84, 107);
+    --accent-secondary: rgb(209, 88, 152);
+    --accent-light: rgb(230, 168, 178);
+    --accent-lighter: rgb(242, 202, 208);
+    --accent-border: rgba(219, 84, 107, 0.18);
+    --accent-border-hover: rgba(219, 84, 107, 0.40);
+    --accent-badge-start: rgba(219, 84, 107, 0.10);
+    --accent-badge-end: rgba(209, 88, 152, 0.10);
+    --accent-glow: rgba(219, 84, 107, 0.22);
+    --accent-glow-subtle: rgba(219, 84, 107, 0.10);
+    --accent-ambient: rgba(219, 84, 107, 0.10);
+    --accent-muted-bg: rgba(219, 84, 107, 0.05);
+  }
+}
+
+/* Hide scrollbars while keeping scroll functional */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom link styling */
+a {
+  transition: all 0.3s ease;
+}
+
+/* Section animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Enhanced button styles */
+button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Text selection styling */
+::selection {
+  background: var(--accent-border-hover, rgba(147, 83, 211, 0.35));
+  color: #ffffff;
+}
+
+/* Improved focus states for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent-primary, #9353d3);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions across elements */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter;
+  transition-duration: 220ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Prevent transition on initial page load */
+.no-transition {
+  transition: none !important;
+}
+
+@keyframes cd-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cd-spinning {
+  animation: cd-spin 3.5s linear infinite;
+}
+
+.cd-paused {
+  animation: cd-spin 3.5s linear infinite;
+  animation-play-state: paused;
+}
+
+body {
+  font-family: var(--font-family, 'Inter', sans-serif);
+  background-color: #050711;
+  color: #f8fafc;
+  background-image: 
+    radial-gradient(circle at 18% 10%, var(--accent-ambient) 0%, transparent 45%),
+    radial-gradient(circle at 82% 28%, var(--accent-glow-subtle) 0%, transparent 40%),
+    radial-gradient(circle at 18% 60%, var(--accent-ambient) 0%, transparent 45%),
+    radial-gradient(circle at 82% 88%, var(--accent-glow-subtle) 0%, transparent 45%);
+  background-attachment: fixed;
+}
+
+.spectral-border {
+  position: relative;
+}
+
+.spectral-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 50%, var(--accent-light) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.spectral-glow {
+  box-shadow: 0 0 35px -12px var(--accent-glow);
+}
