@@ -23,6 +23,7 @@ flowchart LR
 - **Interview Prep**: Tailored scenario questions and role-specific candidate pitches.
 - **Consolidated Skills Matrix**: Unified multi-source mapping cross-referencing claims, across all data sources.
 - **Developer Profile Roast**: Lighthearted, witty critique analyzing commits, difficulty ratios, and tech choices.
+- **Rate Limiting & Abuse Prevention**: Per IP request throttling to protect upstream server endpoints.
 
 ## Tech Stack
 

@@ -3,7 +3,7 @@
 }
 
 {$DOMAIN_NAME} {
-    # Rate limit: 100 requests per minute per IP to protect the MCP server
+    # Rate limit: 25 requests per minute per IP to protect the MCP server
     rate_limit {
         zone mcp_limit {
             key {remote_host}
